@@ -1,8 +1,15 @@
 import 'package:avda/principal/login.dart';
 import 'package:flutter/material.dart';
 
+//importaciones fire base
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -24,7 +31,6 @@ class MyApp extends StatelessWidget {
 
 class Inicio extends StatelessWidget {
   const Inicio({super.key, required String title});
-  
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +76,8 @@ class Inicio extends StatelessWidget {
             ),
           ),
         ],*/
-
-        ),
-        body: SingleChildScrollView(
+      ),
+      body: SingleChildScrollView(
         child: Center(
           child: Column(
             children: <Widget>[
@@ -80,30 +85,30 @@ class Inicio extends StatelessWidget {
               const SizedBox(height: 10),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'AVDA',
-                            style: TextStyle(
-                              fontSize: 40.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          'AVDA',
+                          style: TextStyle(
+                            fontSize: 40.0,
+                            fontWeight: FontWeight.bold,
                           ),
-                          Text(
-                            'ALMACEN',
-                            style: TextStyle(
-                              fontSize: 30.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        ),
+                        Text(
+                          'ALMACEN',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                 ),
+                  ),
+                ],
+              ),
 
               /*Image.asset(
                 'assets/images/example_image.jpg', // Ruta de la imagen en tu proyecto
@@ -111,11 +116,13 @@ class Inicio extends StatelessWidget {
                 height: 200,
               ),*/
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,// Espacio entre la imagen y el texto
+                mainAxisAlignment: MainAxisAlignment
+                    .center, // Espacio entre la imagen y el texto
                 children: [
-                Expanded(
-                  child: Center(
-                  child: Image.asset('assets/Logo.png', width: 400, height: 300),
+                  Expanded(
+                    child: Center(
+                      child: Image.asset('assets/Logo.png',
+                          width: 400, height: 300),
                     ),
                   ),
                 ],
@@ -128,13 +135,13 @@ class Inicio extends StatelessWidget {
                     child: FractionallySizedBox(
                       widthFactor: 0.4,
                       child: SizedBox(
-                        height: 30.0, 
+                        height: 30.0,
                         child: ElevatedButton(
-                            onPressed: ()=>{
+                          onPressed: () => {
                             Navigator.push(
-                              context, 
-                              MaterialPageRoute(builder: (context)=>const Login())
-                            )
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Login()))
                           },
                           /*ElevatedButton(
                           onPressed: () {
@@ -142,15 +149,16 @@ class Inicio extends StatelessWidget {
                           },*/
                           style: ButtonStyle(
                             alignment: Alignment.center,
-                            backgroundColor: MaterialStateProperty.all(const Color.fromARGB(255, 208, 181, 230)),
+                            backgroundColor: MaterialStateProperty.all(
+                                const Color.fromARGB(255, 208, 181, 230)),
                           ),
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                
                                 'Iniciar Sesión',
-                                style: TextStyle(color: Colors.black,fontSize: 17),
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 17),
                               ),
                             ],
                           ),
@@ -159,7 +167,7 @@ class Inicio extends StatelessWidget {
                     ),
                   ),
                 ],
-              /*levatedButton(
+                /*levatedButton(
                 onPressed: (){
                    Navigator.pushNamed(context, 'Botón presionado');
                   // Acción a realizar cuando se presiona el botón
@@ -167,9 +175,9 @@ class Inicio extends StatelessWidget {
                child: const Text('Iniciar Sesión'),
              ),*/
               ),
-          ],
+            ],
+          ),
         ),
-      ),
       ),
     );
   }

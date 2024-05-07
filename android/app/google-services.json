@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "445773704635",
+    "project_id": "sistema-avda",
+    "storage_bucket": "sistema-avda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445773704635:android:e417256e3f6eb545df689e",
+        "android_client_info": {
+          "package_name": "com.example.avda"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD14xHreGvgyBg2zldNW5uADcUrVe7qIM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
