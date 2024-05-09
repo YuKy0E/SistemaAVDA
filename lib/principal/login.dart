@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:avda/principal/tipo_usuario.dart';
-import 'package:flutter/material.dart';
+
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -83,7 +83,13 @@ class _LoginState extends State<Login> {
                 ),
               ),
             ),
-            ElevatedButton(
+
+            const SizedBox(height: 70, width: 50,),
+            Container(
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: Column(
+                children: [
+                ElevatedButton(
               onPressed: () async {
                 String username = nameController.text;
                 String password = passwordController.text;
@@ -102,8 +108,26 @@ class _LoginState extends State<Login> {
                   );
                 } catch (e) {
                   setState(() {
+                    //errorText = 'Error: Ocurrió un problema durante el inicio de sesión.';
                     errorText = 'Error: ${e.toString()}';
-                  });
+                    });
+                    showDialog(
+                      context: context, 
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                          title: const Text('Error'),
+                          content: const Text("Usuario o contraseña incorrectos."),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              }, 
+                              child: const Text('Cerrar'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                 }
               },
               child: const Text(
@@ -111,10 +135,14 @@ class _LoginState extends State<Login> {
                 style: TextStyle(color: Colors.black, fontSize: 17),
               ),
             ),
-            Text(
+             Text(
               errorText,
               style: const TextStyle(color: Colors.red),
+                ),
+              ],
             ),
+          ),
+
           ],
         ),
       ),
