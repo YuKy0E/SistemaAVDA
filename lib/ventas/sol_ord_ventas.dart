@@ -1,11 +1,17 @@
-// ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
+class sol_ord_ventas extends StatefulWidget {
+  const sol_ord_ventas({Key? key}) : super(key: key);
 
+  @override
+  _sol_ord_ventasState createState() => _sol_ord_ventasState();
+}
 
-class sol_ord_ventas extends StatelessWidget {
-  const sol_ord_ventas({super.key});
+class _sol_ord_ventasState extends State<sol_ord_ventas> {
+  final TextEditingController _searchController = TextEditingController();
+  String productId = '';
+  int? requestedQuantity;
 
   @override
   Widget build(BuildContext context) {
@@ -29,80 +35,98 @@ class sol_ord_ventas extends StatelessWidget {
           ),
         ),
       ),
-
-
-
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           const Padding(
-            
             padding: EdgeInsets.all(16.0),
             child: Text(
-              
               'Realizar orden de venta',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const Text('Código de producto'),
+                const Text('Buscar producto por ID'),
                 TextFormField(
+                  controller: _searchController,
+                  onChanged: (value) {
+                    setState(() {
+                      productId = value;
+                    });
+                  },
                   decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.code),
-                  border: OutlineInputBorder(
-                    //borderRadius: BorderRadius.circular(radius), // Radio de esquina grande para hacerlo ovalado
-                  ),
-                    hintText: 'Ingrese el código',
+                    prefixIcon: Icon(Icons.search),
+                    hintText: 'Ingrese el ID del producto',
                   ),
                 ),
-                const SizedBox(height: 20), // Espacio entre elementos
+                const SizedBox(height: 20),
                 const Text('Piezas solicitadas'),
                 TextFormField(
+                  onChanged: (value) => requestedQuantity = int.tryParse(value),
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.production_quantity_limits_outlined),
-                  border: OutlineInputBorder(
-                    //borderRadius: BorderRadius.circular(radius), // Radio de esquina grande para hacerlo ovalado
-                  ),
                     hintText: 'Ingrese el número de piezas',
                   ),
                 ),
               ],
             ),
           ),
-          /*const SizedBox(height: 20), // Espacio entre elementos
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                // Enviar orden de ventas
-              },
-              child: const Text('Enviar Orden de Ventas'),
+          const SizedBox(height: 20),
+          Center(
+            child: FractionallySizedBox(
+              widthFactor: 0.6,
+              child: ElevatedButton(
+                onPressed: _generateOrder,
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      const Color.fromARGB(255, 208, 181, 230)),
+                ),
+                child: const Text(
+                  'Generar Orden de Ventas',
+                  style: TextStyle(color: Colors.black, fontSize: 17),
+                ),
+              ),
             ),
-          ),*/
+          ),
+        ],
+      ),
+    );
+  }
 
-          Column(
-  crossAxisAlignment: CrossAxisAlignment.center,
-  children: [
-    const SizedBox(
-      height: 120.0, // Altura del espacio en la parte superior
-    ),
-    Center(
-      child: FractionallySizedBox(
-        widthFactor: 0.6,
-        child: ElevatedButton(
-          onPressed: () {
+  Future<void> _generateOrder() async {
+    if (productId.isNotEmpty &&
+        requestedQuantity != null &&
+        requestedQuantity! > 0) {
+      final productQuery = await FirebaseFirestore.instance
+          .collection('productos')
+          .where('id_pro', isEqualTo: productId)
+          .get();
+      final productDocs = productQuery.docs;
+
+      if (productDocs.isNotEmpty) {
+        final productData = productDocs.first.data() as Map<String, dynamic>?;
+        if (productData != null) {
+          final productCost = productData['costo_pro'] as double?;
+          if (productCost != null) {
+            final orderCost = productCost * requestedQuantity!;
+            await FirebaseFirestore.instance.collection('ordenes').add({
+              'id_prod': productId,
+              'cant_ven': requestedQuantity!,
+              'cost_ven': orderCost,
+              'est_ord': false,
+            });
+
             showDialog(
-              context: context, 
-              builder: (BuildContext context){
+              context: context,
+              builder: (BuildContext context) {
                 return AlertDialog(
-                  title: const Text("Orden de venta"),
-                  content: const Text("La orden de venta se ha realizado."),
+                  title: const Text("Orden de venta generada"),
+                  content: Text("El costo de la orden es: $orderCost"),
                   actions: [
                     TextButton(
                       onPressed: () {
@@ -114,65 +138,46 @@ class sol_ord_ventas extends StatelessWidget {
                 );
               },
             );
+          }
+        }
+      } else {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Error"),
+              content: const Text("El código de producto ingresado no existe."),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("Aceptar"),
+                ),
+              ],
+            );
           },
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(const Color.fromARGB(255, 208, 181, 230)),
-          ),
-          child: const Text(
-            'Enviar Orden de Ventas',
-            style: TextStyle(color: Colors.black, fontSize: 17),
-          ),
-        ),
-      ),
-    ),
-        ],
-      ),
-        ]
-      ),
-    );
-  }
-}
-/*
-        void _showDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Ingrese el código de producto y las piezas requeridas', 
-            style: TextStyle(
-            fontSize: 15.0,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 0, 0, 0),
-          ),),
-          content: const Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              TextField(
-                decoration: InputDecoration(labelText: 'Código de Producto'),
-              ),
-              TextField(
-                decoration: InputDecoration(labelText: 'Piezas Requeridas'),
-                keyboardType: TextInputType.number,
+        );
+      }
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Error"),
+            content: const Text(
+                "Por favor, ingrese un ID de producto válido y una cantidad válida."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Aceptar"),
               ),
             ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Declinar'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Aceptar'),
-            ),
-          ],
-        );
-      },
-    );
+          );
+        },
+      );
+    }
   }
-
-}*/
+}

@@ -141,7 +141,9 @@ class Inicio extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const Login()))
+                                    builder: (context) => const Login(
+                                          key: null,
+                                        )))
                           },
                           /*ElevatedButton(
                           onPressed: () {

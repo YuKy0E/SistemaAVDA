@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:avda/principal/tipo_usuario.dart';
 
-
 class TipoUsuario extends StatelessWidget {
   const TipoUsuario({super.key});
 
@@ -42,25 +41,26 @@ class TipoUsuario extends StatelessWidget {
             Container(
               width: 210, // Ancho fijo para el contenedor del botón
               height: 40,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: ElevatedButton(
-              onPressed: ()=>{
-                            Navigator.push(
-                              context, 
-                              MaterialPageRoute(builder: (context)=> const Menu_Almacenista()) //pendiente por conectar
-                            ),
-                          },
-                          style: ButtonStyle(
-                           backgroundColor: MaterialStateProperty.all(const Color.fromARGB(255, 208, 181, 230)),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: ElevatedButton(
+                onPressed: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const Menu_Almacenista()) //pendiente por conectar
+                      ),
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      const Color.fromARGB(255, 208, 181, 230)),
                 ),
-            
-              child: const Text(
-                'Usuario Almacen',
-                style: TextStyle(color: Colors.black, fontSize: 17),
+                child: const Text(
+                  'Usuario Almacen',
+                  style: TextStyle(color: Colors.black, fontSize: 17),
                 ),
+              ),
             ),
-
-        ),
             const SizedBox(height: 40), // Separación entre los botones
             /*ElevatedButton(
               onPressed: () {
@@ -70,23 +70,24 @@ class TipoUsuario extends StatelessWidget {
             ),*/
             Container(
               width: 200, // Ancho fijo para el contenedor del botón
-                height: 40,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: ElevatedButton(
-                  onPressed: ()=>{
-                            Navigator.push(
-                              context, 
-                              MaterialPageRoute(builder: (context)=>const Menu_Ventas())
-                            )
-                          },
-                          style: ButtonStyle(
-                           backgroundColor: MaterialStateProperty.all(const Color.fromARGB(255, 208, 181, 230)),
+              height: 40,
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: ElevatedButton(
+                onPressed: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Menu_Ventas()))
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      const Color.fromARGB(255, 208, 181, 230)),
                 ),
-                  child: const Text(
-                    'Usuario Ventas',
-                      style: TextStyle(color: Colors.black, fontSize: 17),
-                      ),
+                child: const Text(
+                  'Usuario Ventas',
+                  style: TextStyle(color: Colors.black, fontSize: 17),
                 ),
+              ),
             ),
           ],
         ),

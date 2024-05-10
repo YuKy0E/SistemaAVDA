@@ -1,7 +1,9 @@
+import 'package:avda/administraci%C3%B3n/Menu_Almacenista.dart';
+import 'package:avda/ventas/menu_ventas.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:avda/principal/tipo_usuario.dart';
-import 'package:flutter/material.dart';
+//import 'package:avda/principal/menu_ventas.dart'; // Importa la pantalla MenuVentas
+//import 'package:avda/principal/menu_almacenista.dart'; // Importa la pantalla MenuAlmacenista
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -95,11 +97,26 @@ class _LoginState extends State<Login> {
                     password: password,
                   );
 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const TipoUsuario()),
-                  );
+                  String userType = '';
+
+                  if (username.startsWith('ven')) {
+                    userType = 'ventas';
+                  } else if (username.startsWith('alm')) {
+                    userType = 'almacen';
+                  }
+
+                  if (userType == 'ventas') {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Menu_Ventas()),
+                    );
+                  } else if (userType == 'almacen') {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Menu_Almacenista()),
+                    );
+                  }
                 } catch (e) {
                   setState(() {
                     errorText = 'Error: ${e.toString()}';
