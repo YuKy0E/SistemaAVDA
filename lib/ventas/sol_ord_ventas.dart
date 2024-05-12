@@ -11,7 +11,49 @@ class sol_ord_ventas extends StatefulWidget {
 class _sol_ord_ventasState extends State<sol_ord_ventas> {
   final TextEditingController _searchController = TextEditingController();
   String productId = '';
+  int costProduct = 0;
+  int cantProduct = 0;
   int? requestedQuantity;
+  var collection = FirebaseFirestore.instance.collection('productos');
+
+  Future<void> _getProductByIdPro() async {
+    // Realiza la consulta a Firestore buscando documentos que tengan la propiedad 'id_pro' igual al valor proporcionado
+    QuerySnapshot productQuery =
+        await collection.where('id_pro', isEqualTo: productId).get();
+
+    // Verifica si se encontraron documentos
+    if (productQuery.docs.isNotEmpty) {
+      // Accede a los documentos encontrados
+      for (DocumentSnapshot doc in productQuery.docs) {
+        Map<String, dynamic> productData = doc.data() as Map<String, dynamic>;
+
+        print('Nombre del producto: ${productData['nom_pro']}');
+        print('Precio del producto: ${productData['cost_pro']}');
+        print('Cantidad del producto: ${productData['cant_pro']}');
+        costProduct = productData['cost_pro'] as int;
+        cantProduct = productData['cant_pro'] as int;
+      }
+      _generateOrder();
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Error"),
+            content: const Text("El código de producto ingresado no existe."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Aceptar"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +123,7 @@ class _sol_ord_ventasState extends State<sol_ord_ventas> {
             child: FractionallySizedBox(
               widthFactor: 0.6,
               child: ElevatedButton(
-                onPressed: _generateOrder,
+                onPressed: _getProductByIdPro,
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
                       const Color.fromARGB(255, 208, 181, 230)),
@@ -102,71 +144,47 @@ class _sol_ord_ventasState extends State<sol_ord_ventas> {
     if (productId.isNotEmpty &&
         requestedQuantity != null &&
         requestedQuantity! > 0) {
-      final productQuery = await FirebaseFirestore.instance
-          .collection('productos')
-          .where('id_pro', isEqualTo: productId)
-          .get();
-      final productDocs = productQuery.docs;
+      // Obtener el último ID de orden generado
+      DocumentSnapshot lastOrder = await FirebaseFirestore.instance
+          .collection('ordenes')
+          .orderBy('id_ord', descending: true)
+          .limit(1)
+          .get()
+          .then((value) => value.docs.first);
 
-      if (productDocs.isNotEmpty) {
-        final productData = productDocs.first.data() as Map<String, dynamic>?;
-        if (productData != null) {
-          final productCost = productData['costo_pro'] as double?;
-          if (productCost != null) {
-            final orderCost = productCost * requestedQuantity!;
-            await FirebaseFirestore.instance.collection('ordenes').add({
-              'id_prod': productId,
-              'cant_ven': requestedQuantity!,
-              'cost_ven': orderCost,
-              'est_ord': false,
-            });
+      int lastOrderId = (lastOrder.exists)
+          ? (lastOrder.data() as Map<String, dynamic>)['id_ord']
+          : 0;
 
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text("Orden de venta generada"),
-                  content: Text("El costo de la orden es: $orderCost"),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text("Aceptar"),
-                    ),
-                  ],
-                );
-              },
-            );
-          }
-        }
-      } else {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text("Error"),
-              content: const Text("El código de producto ingresado no existe."),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text("Aceptar"),
-                ),
-              ],
-            );
-          },
-        );
-      }
-    } else {
+      final orderCost = costProduct * requestedQuantity!;
+
+      // Generar nueva orden con el ID incrementado
+      await FirebaseFirestore.instance.collection('ordenes').add({
+        'id_ord': lastOrderId + 1,
+        'id_prod': productId,
+        'cant_ven': requestedQuantity!,
+        'cost_ven': orderCost,
+        'est_ord': false,
+      });
+
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text("Error"),
-            content: const Text(
-                "Por favor, ingrese un ID de producto válido y una cantidad válida."),
+            title: const Text("Orden de venta generada"),
+            content: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text("Numero de orden: $lastOrderId"),
+                SizedBox(height: 8), // Espacio entre los textos
+                Text("Costo total de la orden: $orderCost"),
+                SizedBox(height: 8), // Espacio entre los textos
+                Text("Cantidad del producto solicitado: $requestedQuantity"),
+                SizedBox(height: 8), // Espacio entre los textos,
+                Text("Producto solicitado: $productId"),
+              ],
+            ),
             actions: [
               TextButton(
                 onPressed: () {

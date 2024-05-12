@@ -40,25 +40,26 @@ class Menu_Ventas extends StatelessWidget {
             Container(
               width: 250, // Ancho fijo para el contenedor del botón
               height: 40,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: ElevatedButton(
-              onPressed: ()=>{
-                            Navigator.push(
-                              context, 
-                              MaterialPageRoute(builder: (context)=> const sol_ord_ventas()) //pendiente por conectar
-                            ),
-                          },
-                          style: ButtonStyle(
-                           backgroundColor: MaterialStateProperty.all(const Color.fromARGB(255, 208, 181, 230)),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: ElevatedButton(
+                onPressed: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const sol_ord_ventas()) //pendiente por conectar
+                      ),
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      const Color.fromARGB(255, 208, 181, 230)),
                 ),
-            
-              child: const Text(
-                'Realizar orden de venta',
-                style: TextStyle(color: Colors.black, fontSize: 17),
+                child: const Text(
+                  'Realizar orden de venta',
+                  style: TextStyle(color: Colors.black, fontSize: 17),
                 ),
+              ),
             ),
-
-        ),
             const SizedBox(height: 40), // Separación entre los botones
             /*ElevatedButton(
               onPressed: () {
@@ -68,23 +69,24 @@ class Menu_Ventas extends StatelessWidget {
             ),*/
             Container(
               width: 250, // Ancho fijo para el contenedor del botón
-                height: 40,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: ElevatedButton(
-                  onPressed: ()=>{
-                            Navigator.push(
-                              context, 
-                              MaterialPageRoute(builder: (context)=> const EstadoOrdenVentas())
-                            )
-                          },
-                          style: ButtonStyle(
-                           backgroundColor: MaterialStateProperty.all(const Color.fromARGB(255, 208, 181, 230)),
+              height: 40,
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: ElevatedButton(
+                onPressed: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EstadoOrdenVentas()))
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      const Color.fromARGB(255, 208, 181, 230)),
                 ),
-                  child: const Text(
-                    'Ver ordenes de ventas',
-                      style: TextStyle(color: Colors.black, fontSize: 17),
-                      ),
+                child: const Text(
+                  'Ver ordenes de ventas',
+                  style: TextStyle(color: Colors.black, fontSize: 17),
                 ),
+              ),
             ),
           ],
         ),
