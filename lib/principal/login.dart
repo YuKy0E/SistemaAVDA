@@ -2,8 +2,6 @@ import 'package:avda/administraci%C3%B3n/Menu_Almacenista.dart';
 import 'package:avda/ventas/menu_ventas.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:avda/principal/menu_ventas.dart'; // Importa la pantalla MenuVentas
-//import 'package:avda/principal/menu_almacenista.dart'; // Importa la pantalla MenuAlmacenista
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -118,9 +116,23 @@ class _LoginState extends State<Login> {
                     );
                   }
                 } catch (e) {
-                  setState(() {
-                    errorText = 'Error: ${e.toString()}';
-                  });
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Error de inicio de sesión'),
+                        content: Text('Usuario o contraseña incorrectos'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('Cerrar'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 }
               },
               child: const Text(
