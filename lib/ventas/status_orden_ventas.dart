@@ -19,7 +19,10 @@ class _EstadoOrdenVentasState extends State<EstadoOrdenVentas> {
 
   Widget _buildOrdenesList() {
     return StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('ordenes').snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('ordenes')
+          .orderBy('id_ord', descending: true)
+          .snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData || snapshot.data == null) {
           return CircularProgressIndicator();
