@@ -48,7 +48,7 @@ class _EstadoOrdenVentasState extends State<EstadoOrdenVentas> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text('ID de Producto: ${doc['id_pro']}'),
+              Text('ID de Producto: ${doc['id_prod']}'),
               Text('Cantidad solicitada: ${doc['cant_ven']}'),
               Text('Costo total de Venta: ${doc['cost_ven']}'),
               Text('Estado de la Orden: ${doc['est_ord']}'),
