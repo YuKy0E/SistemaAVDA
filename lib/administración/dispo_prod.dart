@@ -1,32 +1,71 @@
-// ignore_for_file: non_constant_identifier_names
-// ignore: avoid_web_libraries_in_flutter
-
 import 'package:avda/administraci%C3%B3n/Menu_Almacenista.dart';
 import 'package:avda/administraci%C3%B3n/buscar_prod.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-
-// ignore: camel_case_types
 class Dispo_pro extends StatefulWidget {
-  const Dispo_pro({super.key});
+  final String codigoProducto;
+
+  const Dispo_pro({Key? key, required this.codigoProducto}) : super(key: key);
 
   @override
-  State<Dispo_pro> createState() => _Dispo_pro();
+  State<Dispo_pro> createState() => _Dispo_proState();
 }
 
-// ignore: camel_case_types
-class _Dispo_pro extends State<Dispo_pro> {
+class _Dispo_proState extends State<Dispo_pro> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+    nameController.text = widget
+        .codigoProducto; // Asigna el valor de codigoProducto al campo de texto
+
+    // Realiza la búsqueda en la base de datos y actualiza el valor de passwordController
+    buscarProducto(widget.codigoProducto);
+  }
+
+  Future<void> buscarProducto(String codigoProducto) async {
+    try {
+      // Realiza la consulta en la colección "productos" con el código del producto
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('productos')
+          .where('id_pro', isEqualTo: codigoProducto)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        // Si se encuentra el producto, obtén el valor de cant_pro y conviértelo a entero
+        int piezasDisponibles = querySnapshot.docs.first['cant_pro'];
+
+        // Actualiza el valor de passwordController
+        setState(() {
+          passwordController.text = piezasDisponibles.toString();
+        });
+      } else {
+        // Si no se encuentra el producto, muestra un mensaje de error
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Producto no encontrado'),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      }
+    } catch (e) {
+      // En caso de error, muestra un mensaje de error
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error al buscar el producto: $e'),
+          duration: Duration(seconds: 3),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        /*title: const Text(
-          'Inicio',
-          ),*/
         backgroundColor: const Color.fromARGB(255, 174, 153, 223),
         elevation: 0,
         centerTitle: true,
@@ -45,110 +84,92 @@ class _Dispo_pro extends State<Dispo_pro> {
           ),
         ),
       ),
-
-
-      body: //cuerpo(), 
-      Padding(
+      body: Padding(
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: <Widget>[
-            /*Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: const Text(
-                  'ALMACEN',
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 188, 119, 209),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 30),
-                )),
-                
             Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: const Text(
-                  'Codigo del producto',
-                  style: TextStyle(fontSize: 20),
-                )),*/
-                Container(
-                  
               padding: const EdgeInsets.all(10),
               child: TextField(
                 controller: nameController,
                 decoration: InputDecoration(
-                  //prefixIcon: const Icon(Icons.person),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0), // Radio de esquina grande para hacerlo ovalado
+                    borderRadius: BorderRadius.circular(30.0),
                   ),
-                   contentPadding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0), // Ajusta el relleno interno
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 16.0, horizontal: 20.0),
                   labelText: 'Codigo del producto',
                 ),
               ),
             ),
             Container(
-              
               padding: const EdgeInsets.all(10),
               child: TextField(
-                controller: nameController,
+                controller: passwordController,
                 decoration: InputDecoration(
-                  //prefixIcon: const Icon(Icons.code),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0), // Radio de esquina grande para hacerlo ovalado
+                    borderRadius: BorderRadius.circular(30.0),
                   ),
-                   contentPadding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0), // Ajusta el relleno interno
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 16.0, horizontal: 20.0),
                   labelText: 'Piezas disponibles',
                 ),
               ),
             ),
-            
-
-            const SizedBox(height: 40, ), // Añade un espacio entre el campo de texto y el botón
-            Center( // Centro el botón horizontalmente
-            child: Container(
-                width: 230, // Ancho fijo para el contenedor del botón
+            const SizedBox(
+              height: 40,
+            ),
+            Center(
+              child: Container(
+                width: 230,
                 height: 40,
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: ElevatedButton(
-      onPressed: ()=>{
-                Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context)=>const Buscar_prod())
-                )
-              },
-              style: ButtonStyle(
-               backgroundColor: MaterialStateProperty.all(const Color.fromARGB(255, 208, 181, 230)),
-    ),
-      child: const Text(
-        'Buscar otro producto',
-          style: TextStyle(color: Colors.black, fontSize: 17),
-          ),
-    ),
-            ),
-            ),
-            const SizedBox(height: 40, width: 50,), // Añade un espacio entre el campo de texto y el botón
-            Center( // Centro el botón horizontalmente
-            child: Container(
-                width: 200, // Ancho fijo para el contenedor del botón
-                height: 40,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: ElevatedButton(
-                  
-                  onPressed: ()=>{
-                            Navigator.push(
-                              context, 
-                              MaterialPageRoute(builder: (context)=>const Menu_Almacenista())
-                            )
-                          },
-                          style: ButtonStyle(
-               backgroundColor: MaterialStateProperty.all(const Color.fromARGB(255, 208, 181, 230)),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Buscar_prod()),
+                    );
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                        const Color.fromARGB(255, 208, 181, 230)),
+                  ),
+                  child: const Text(
+                    'Buscar otro producto',
+                    style: TextStyle(color: Colors.black, fontSize: 17),
+                  ),
                 ),
-                child: const Text('Regresar', 
-                style: TextStyle(color: Colors.black, fontSize: 17),
-          ),
-          ),
+              ),
             ),
+            const SizedBox(
+              height: 40,
             ),
-            
+            Center(
+              child: Container(
+                width: 200,
+                height: 40,
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Menu_Almacenista()),
+                    );
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                        const Color.fromARGB(255, 208, 181, 230)),
+                  ),
+                  child: const Text(
+                    'Regresar',
+                    style: TextStyle(color: Colors.black, fontSize: 17),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
