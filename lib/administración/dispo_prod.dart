@@ -68,7 +68,7 @@ class _Dispo_proState extends State<Dispo_pro> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 174, 153, 223),
+        backgroundColor: const Color.fromARGB(255, 174, 125, 219),
         elevation: 0,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -92,30 +92,40 @@ class _Dispo_proState extends State<Dispo_pro> {
           children: <Widget>[
             Container(
               padding: const EdgeInsets.all(10),
-              child: TextField(
+              child: TextFormField(
+                enabled: false,
                 controller: nameController,
                 decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.barcode_reader), // Icono para codigo 
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
+                    borderSide: const BorderSide(color: Colors.black),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
                       vertical: 16.0, horizontal: 20.0),
                   labelText: 'Codigo del producto',
+                  labelStyle: const TextStyle(color: Colors.black),
                 ),
+                style: const TextStyle(color: Colors.black),
               ),
             ),
             Container(
               padding: const EdgeInsets.all(10),
-              child: TextField(
+              child: TextFormField(
+                enabled: false,
                 controller: passwordController,
                 decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.production_quantity_limits),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
+                    borderSide: const BorderSide(color: Colors.black),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
                       vertical: 16.0, horizontal: 20.0),
                   labelText: 'Piezas disponibles',
+                  labelStyle: const TextStyle(color: Colors.black),
                 ),
+                style: const TextStyle(color: Colors.black),
               ),
             ),
             const SizedBox(
