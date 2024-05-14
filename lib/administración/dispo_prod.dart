@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, camel_case_types
+
 import 'package:avda/administraci%C3%B3n/Menu_Almacenista.dart';
 import 'package:avda/administraci%C3%B3n/buscar_prod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,7 +8,7 @@ import 'package:flutter/material.dart';
 class Dispo_pro extends StatefulWidget {
   final String codigoProducto;
 
-  const Dispo_pro({Key? key, required this.codigoProducto}) : super(key: key);
+  const Dispo_pro({super.key, required this.codigoProducto});
 
   @override
   State<Dispo_pro> createState() => _Dispo_proState();
@@ -45,7 +47,7 @@ class _Dispo_proState extends State<Dispo_pro> {
       } else {
         // Si no se encuentra el producto, muestra un mensaje de error
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Producto no encontrado'),
             duration: Duration(seconds: 3),
           ),
@@ -56,7 +58,7 @@ class _Dispo_proState extends State<Dispo_pro> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error al buscar el producto: $e'),
-          duration: Duration(seconds: 3),
+          duration: const Duration(seconds: 3),
         ),
       );
     }
