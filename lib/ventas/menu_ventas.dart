@@ -14,7 +14,7 @@ class Menu_Ventas extends StatelessWidget {
         /*title: const Text(
           'Inicio',
           ),*/
-        backgroundColor: const Color.fromARGB(255, 174, 153, 223),
+        backgroundColor: const Color.fromARGB(255, 174, 125, 219), 
         elevation: 0,
         centerTitle: true,
         shape: const RoundedRectangleBorder(

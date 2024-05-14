@@ -59,7 +59,7 @@ class _sol_ord_ventasState extends State<sol_ord_ventas> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 174, 153, 223),
+        backgroundColor: const Color.fromARGB(255, 174, 125, 219), 
         elevation: 0,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -84,7 +84,11 @@ class _sol_ord_ventasState extends State<sol_ord_ventas> {
             padding: EdgeInsets.all(16.0),
             child: Text(
               'Realizar orden de venta',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 52, 34, 212)
+                ),
             ),
           ),
           Padding(
@@ -92,7 +96,13 @@ class _sol_ord_ventasState extends State<sol_ord_ventas> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const Text('Buscar producto por ID'),
+                const Text('Buscar producto por ID',
+                style: TextStyle(
+                fontSize: 16, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 0, 0, 0)
+                ),
+                ),
                 TextFormField(
                   controller: _searchController,
                   onChanged: (value) {
@@ -106,7 +116,13 @@ class _sol_ord_ventasState extends State<sol_ord_ventas> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Text('Piezas solicitadas'),
+                const Text('Piezas solicitadas',
+                style: TextStyle(
+                fontSize: 16, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 0, 0, 0)
+                  ),
+                ),
                 TextFormField(
                   onChanged: (value) => requestedQuantity = int.tryParse(value),
                   keyboardType: TextInputType.number,
@@ -171,18 +187,102 @@ class _sol_ord_ventasState extends State<sol_ord_ventas> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text("Orden de venta generada"),
+            title: const Text("Orden de venta generada",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 20, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 46, 42, 94)
+              ),
+            ),
             content: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text("Numero de orden: $lastOrderId"),
+                Row( 
+                  children: [
+                const Text("Numero de orden: ",
+                style: TextStyle(
+                fontSize: 16, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 1, 70, 13)
+                  ),
+                ),
+                Text("$lastOrderId",
+                style: const TextStyle(
+                fontSize: 16, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 0, 0, 0)
+                  ),
+                  ),
+                  ],
+                ),
                 SizedBox(height: 8), // Espacio entre los textos
-                Text("Costo total de la orden: $orderCost"),
+                
+                Row(
+                  children: [
+                const Text("Costo total de la orden: ",
+                style: TextStyle(
+                fontSize: 16, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 1, 70, 13)
+                  ),
+                  ),
+
+                  Text("$orderCost pesos",
+                style: const TextStyle(
+                fontSize: 16, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 0, 0, 0)
+                  ),
+                  ),
+                  ],
+                ),
+
+              
                 SizedBox(height: 8), // Espacio entre los textos
-                Text("Cantidad del producto solicitado: $requestedQuantity"),
+
+                Row(
+                  children: [
+                const Text("Cantidad del producto solicitado: ",
+                style: TextStyle(
+                fontSize: 16, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 1, 70, 13)
+                  ),
+                  ),
+
+                  Text("$requestedQuantity piezas",
+                style: const TextStyle(
+                fontSize: 16, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 0, 0, 0)
+                  ),
+                  ),
+                  ],
+                ),
+
                 SizedBox(height: 8), // Espacio entre los textos,
-                Text("Producto solicitado: $productId"),
+                
+                Row(
+                  children: [
+                const Text("Producto solicitado: ",
+                style: TextStyle(
+                fontSize: 16, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 1, 70, 13)
+                  ),
+                  ),
+
+                  Text(" $productId",
+                style: const TextStyle(
+                fontSize: 16, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 0, 0, 0)
+                  ),
+                  ),
+                  ],
+                ),
               ],
             ),
             actions: [
@@ -190,7 +290,15 @@ class _sol_ord_ventasState extends State<sol_ord_ventas> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text("Aceptar"),
+                child: const Text("Aceptar",
+                style: TextStyle(
+                            color: Colors.black, fontSize: 17,),),
+                            style: ButtonStyle(
+                            alignment: Alignment.center,
+                            backgroundColor: MaterialStateProperty.all(
+                                 const Color.fromARGB(255, 208, 181, 230)),
+                                 padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 0.4, horizontal: 10.0)), // Ajusta el tamaño del botón cambiando el padding
+                          ),
               ),
             ],
           );
