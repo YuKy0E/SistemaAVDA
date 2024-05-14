@@ -19,7 +19,7 @@ class _Buscar_prodState extends State<Buscar_prod> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 174, 153, 223),
+        backgroundColor: const Color.fromARGB(255, 174, 125, 219),
         elevation: 0,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -53,7 +53,7 @@ class _Buscar_prodState extends State<Buscar_prod> {
                   });
                 },
                 decoration: InputDecoration(
-                  //prefixIcon: const Icon(Icons.lock), // Icono para la contraseña
+                  prefixIcon: const Icon(Icons.barcode_reader), // Icono para codigo 
                   contentPadding: const EdgeInsets.symmetric(
                       vertical: 16.0,
                       horizontal: 20.0), // Ajusta el relleno interno
