@@ -137,7 +137,7 @@ class _sol_ord_ventasState extends State<sol_ord_ventas> {
           const SizedBox(height: 20),
           Center(
             child: FractionallySizedBox(
-              widthFactor: 0.6,
+              widthFactor: 0.7,
               child: ElevatedButton(
                 onPressed: _getProductByIdPro,
                 style: ButtonStyle(
@@ -244,7 +244,7 @@ class _sol_ord_ventasState extends State<sol_ord_ventas> {
 
                 Row(
                   children: [
-                const Text("Cantidad del producto solicitado: ",
+                const Text("Cantidad solicitada: ",
                 style: TextStyle(
                 fontSize: 16, 
                 fontWeight: FontWeight.bold, 

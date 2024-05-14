@@ -150,7 +150,7 @@ class _EstadoOrdenVentasState extends State<EstadoOrdenVentas> {
 
               Row(
                 children: [
-                  const Text('Costo total de Venta: ',
+                  const Text('Costo total: ',
                 style: TextStyle(
                 fontSize: 17, 
                 fontWeight: FontWeight.bold, 
