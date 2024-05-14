@@ -154,6 +154,7 @@ Future<void> acceptOrder(BuildContext context, documentId, String id_prod,
 
     await docRef.update({
       'est_ord': true,
+      'com_ord': "Se ha aceptado la orden.",
       'acept_ord': true,
     });
     showDialog(
