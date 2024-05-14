@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:avda/administraci%C3%B3n/OrdenVenta_ALM.dart';
 import 'package:avda/ventas/sol_ord_ventas.dart';
 
-
 class Menu_Almacenista extends StatelessWidget {
   const Menu_Almacenista({super.key});
 
@@ -37,12 +36,9 @@ class Menu_Almacenista extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.history),
-            
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      
-            
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
           ),
         ],
       ),
@@ -54,25 +50,24 @@ class Menu_Almacenista extends StatelessWidget {
             Container(
               width: 210, // Ancho fijo para el contenedor del botón
               height: 40,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: ElevatedButton(
-              onPressed: ()=>{
-                            Navigator.push(
-                              context, 
-                              MaterialPageRoute(builder: (context)=> const OrdenVenta_ALM())
-                            ),
-                          },
-                          style: ButtonStyle(
-                           backgroundColor: MaterialStateProperty.all(const Color.fromARGB(255, 208, 181, 230)),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: ElevatedButton(
+                onPressed: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const OrdenVenta_ALM())),
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      const Color.fromARGB(255, 208, 181, 230)),
                 ),
-            
-              child: const Text(
-                'Orden de Venta',
-                style: TextStyle(color: Colors.black, fontSize: 17),
+                child: const Text(
+                  'Orden de Venta',
+                  style: TextStyle(color: Colors.black, fontSize: 17),
                 ),
+              ),
             ),
-
-        ),
             const SizedBox(height: 40), // Separación entre los botones
             /*ElevatedButton(
               onPressed: () {
@@ -82,23 +77,24 @@ class Menu_Almacenista extends StatelessWidget {
             ),*/
             Container(
               width: 200, // Ancho fijo para el contenedor del botón
-                height: 40,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: ElevatedButton(
-                  onPressed: ()=>{
-                            Navigator.push(
-                              context, 
-                              MaterialPageRoute(builder: (context)=>const Buscar_prod())
-                            )
-                          },
-                          style: ButtonStyle(
-                           backgroundColor: MaterialStateProperty.all(const Color.fromARGB(255, 208, 181, 230)),
+              height: 40,
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: ElevatedButton(
+                onPressed: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Buscar_prod()))
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      const Color.fromARGB(255, 208, 181, 230)),
                 ),
-                  child: const Text(
-                    'Buscar Producto',
-                      style: TextStyle(color: Colors.black, fontSize: 17),
-                      ),
+                child: const Text(
+                  'Buscar Producto',
+                  style: TextStyle(color: Colors.black, fontSize: 17),
                 ),
+              ),
             ),
           ],
         ),
