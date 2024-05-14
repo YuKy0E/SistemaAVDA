@@ -133,7 +133,7 @@ class _Dispo_proState extends State<Dispo_pro> {
             ),
             Center(
               child: Container(
-                width: 230,
+                width: 300,
                 height: 40,
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: ElevatedButton(
@@ -160,7 +160,7 @@ class _Dispo_proState extends State<Dispo_pro> {
             ),
             Center(
               child: Container(
-                width: 200,
+                width: 300,
                 height: 40,
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: ElevatedButton(
