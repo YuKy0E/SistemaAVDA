@@ -35,12 +35,12 @@ class Inicio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 214, 209, 224),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
         /*title: const Text(
           'Inicio',
           ),*/
-        backgroundColor: const Color.fromARGB(255, 174, 153, 223),
+        backgroundColor: Color.fromARGB(255, 174, 125, 219),
         elevation: 0,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -152,7 +152,7 @@ class Inicio extends StatelessWidget {
                           style: ButtonStyle(
                             alignment: Alignment.center,
                             backgroundColor: MaterialStateProperty.all(
-                                const Color.fromARGB(255, 208, 181, 230)),
+                                 const Color.fromARGB(255, 208, 181, 230)),
                           ),
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
