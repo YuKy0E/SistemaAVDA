@@ -2,6 +2,7 @@ import 'package:avda/administraci%C3%B3n/Menu_Almacenista.dart';
 import 'package:avda/ventas/menu_ventas.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/widgets.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 174, 153, 223),
+        backgroundColor: Color.fromARGB(255, 174, 125, 219),
         elevation: 0,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -52,7 +53,13 @@ class _LoginState extends State<Login> {
                 ),
               ],
             ),
-            Container(
+            Column(
+            //Container(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              SizedBox(
+                width: 400, // Ajusta el ancho del campo de usuario
+                child: Container(
               padding: const EdgeInsets.all(10),
               child: TextField(
                 controller: nameController,
@@ -62,12 +69,18 @@ class _LoginState extends State<Login> {
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
-                      vertical: 16.0, horizontal: 20.0),
+                      vertical: 12.0, horizontal: 20.0),
                   labelText: 'Usuario',
+                  labelStyle: const TextStyle(fontSize: 14),
                 ),
               ),
             ),
-            Container(
+          ),
+
+            SizedBox(
+            width: 400, // Ajusta el ancho del campo de contraseña
+            child: Container(
+            //Container(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: TextField(
                 obscureText: true,
@@ -75,15 +88,22 @@ class _LoginState extends State<Login> {
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.lock),
                   contentPadding: const EdgeInsets.symmetric(
-                      vertical: 16.0, horizontal: 20.0),
+                      vertical: 12.0, horizontal: 20.0),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   labelText: 'Contraseña',
+                   labelStyle: const TextStyle(fontSize: 14),
                 ),
               ),
             ),
-            ElevatedButton(
+            ),
+
+            const SizedBox(height: 60),
+            Center(
+            child:SizedBox(
+            width: 250, // ajusta el ancho del botón aquí
+            child: ElevatedButton(
               onPressed: () async {
                 String username = nameController.text;
                 String password = passwordController.text;
@@ -120,14 +140,25 @@ class _LoginState extends State<Login> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text('Error de inicio de sesión'),
-                        content: Text('Usuario o contraseña incorrectos'),
+                        title: const Text('Error de inicio de sesión', 
+                                style: TextStyle(
+                                color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),),
+                        content: const Text('Usuario o contraseña incorrectos', style: TextStyle(
+                                color: Color.fromARGB(255, 0, 0, 0), fontSize: 17), ),
                         actions: <Widget>[
                           TextButton(
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            child: Text('Cerrar'),
+                            child: const Text('Cerrar',
+                            style: TextStyle(
+                            color: Colors.black, fontSize: 17,),),
+                            style: ButtonStyle(
+                            alignment: Alignment.center,
+                            backgroundColor: MaterialStateProperty.all(
+                                 const Color.fromARGB(255, 208, 181, 230)),
+                                 padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 0.4, horizontal: 10.0)), // Ajusta el tamaño del botón cambiando el padding
+                          ),
                           ),
                         ],
                       );
@@ -135,9 +166,27 @@ class _LoginState extends State<Login> {
                   );
                 }
               },
-              child: const Text(
+              style: ButtonStyle(
+                            alignment: Alignment.center,
+                            backgroundColor: MaterialStateProperty.all(
+                                 const Color.fromARGB(255, 208, 181, 230)),
+                                 padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 0.4, horizontal: 10.0)), // Ajusta el tamaño del botón cambiando el padding
+                          ),
+              child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Iniciar Sesión',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 17),
+                              ),
+                            ],
+                          ),
+              /*child: const Text(
                 'Iniciar Sesión',
                 style: TextStyle(color: Colors.black, fontSize: 17),
+              ),*/
+            ),
               ),
             ),
             Text(
@@ -146,7 +195,9 @@ class _LoginState extends State<Login> {
             ),
           ],
         ),
+        ],
       ),
+    ),
     );
   }
 }
