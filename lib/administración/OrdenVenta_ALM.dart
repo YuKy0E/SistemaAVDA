@@ -69,14 +69,32 @@ Future<void> updateField(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Orden Denegada'),
-          content: const Text('Se ha denegado la orden con exito.'),
+          title: const Text('Orden Denegada',
+                        style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0), 
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+          ),
+          content: const Text('La orden se ha denegado con exito.',
+          style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0), 
+                        fontSize: 16),),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Aceptar'),
+              child: const Text('Aceptar',
+              style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0), 
+                        fontSize: 16),
+              ),
+              style: ButtonStyle(
+                            alignment: Alignment.center,
+                            backgroundColor: MaterialStateProperty.all(
+                                 const Color.fromARGB(255, 208, 181, 230)),
+                                 padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 0.4, horizontal: 10.0)), // Ajusta el tamaño del botón cambiando el padding
+                          ),
             ),
           ],
         );
@@ -87,15 +105,34 @@ Future<void> updateField(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Ha ocurrido un error'),
+          title: const Text('Ha ocurrido un error',
+          style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0), 
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+          ),
           content: const Text(
-              'Ha ocurrido un error al momento de denegar la orden.'),
+              'Ha ocurrido un error al momento de denegar la orden.',
+              style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0), 
+                        fontSize: 16),
+              ),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Aceptar'),
+              child: const Text('Aceptar',
+              style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0), 
+                        fontSize: 16),
+              ),
+              style: ButtonStyle(
+                            alignment: Alignment.center,
+                            backgroundColor: MaterialStateProperty.all(
+                                 const Color.fromARGB(255, 208, 181, 230)),
+                                 padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 0.4, horizontal: 10.0)), // Ajusta el tamaño del botón cambiando el padding
+                          ),
             ),
           ],
         );
@@ -125,15 +162,34 @@ Future<void> acceptOrder(BuildContext context, documentId, String id_prod,
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: const Text('Inventario Insuficiente'),
+                title: const Text('Inventario Insuficiente',
+                style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0), 
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                ),
                 content: const Text(
-                    'No hay suficientes productos en inventario para completar esta orden.'),
+                    'No hay suficientes productos en inventario para completar esta orden.',
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0), 
+                        fontSize: 16),
+                    ),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: const Text('Aceptar'),
+                    child: const Text('Aceptar',
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0), 
+                        fontSize: 16),
+                        ),
+                     style: ButtonStyle(
+                            alignment: Alignment.center,
+                            backgroundColor: MaterialStateProperty.all(
+                                 const Color.fromARGB(255, 208, 181, 230)),
+                                 padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 0.4, horizontal: 10.0)), // Ajusta el tamaño del botón cambiando el padding
+                          ),
                   ),
                 ],
               );
@@ -161,15 +217,34 @@ Future<void> acceptOrder(BuildContext context, documentId, String id_prod,
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Orden Aceptada'),
-          content: const Text('Se ha aceptado la orden.'),
+          title: const Text('Orden Aceptada',
+          style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0), 
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+          ),
+          content: const Text('Se ha aceptado la orden.',
+          style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0), 
+                        fontSize: 16),
+          ),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 updateUI(); // Actualizar la interfaz de usuario después de la acción
               },
-              child: const Text('Aceptar'),
+              child: const Text('Aceptar',
+              style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0), 
+                        fontSize: 16),
+              ),
+              style: ButtonStyle(
+                            alignment: Alignment.center,
+                            backgroundColor: MaterialStateProperty.all(
+                                 const Color.fromARGB(255, 208, 181, 230)),
+                                 padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 0.4, horizontal: 10.0)), // Ajusta el tamaño del botón cambiando el padding
+                          ),
             ),
           ],
         );
@@ -180,14 +255,33 @@ Future<void> acceptOrder(BuildContext context, documentId, String id_prod,
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Error al aceptar la orden.'),
-          content: const Text('Ha habido un error al aceptar la orden.'),
+          title: const Text('Error al aceptar la orden.',
+          style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0), 
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+          ),
+          content: const Text('Ha habido un error al aceptar la orden.',
+          style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0), 
+                        fontSize: 16),
+          ),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Aceptar'),
+              child: const Text('Aceptar', 
+              style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0), 
+                        fontSize: 16),
+              ),
+              style: ButtonStyle(
+                            alignment: Alignment.center,
+                            backgroundColor: MaterialStateProperty.all(
+                                 const Color.fromARGB(255, 208, 181, 230)),
+                                 padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 0.4, horizontal: 10.0)), // Ajusta el tamaño del botón cambiando el padding
+                          ),
             ),
           ],
         );
@@ -219,7 +313,7 @@ class _OrdenVenta_ALMState extends State<OrdenVenta_ALM> {
           /*title: const Text(
             'Inicio',
             ),*/
-          backgroundColor: const Color.fromARGB(255, 174, 153, 223),
+          backgroundColor: const Color.fromARGB(255, 174, 125, 219),
           elevation: 0,
           centerTitle: true,
           shape: const RoundedRectangleBorder(
@@ -245,7 +339,11 @@ class _OrdenVenta_ALMState extends State<OrdenVenta_ALM> {
                   itemCount: snapshot.data?.length,
                   //Aqui empieza la construccion de las solicitudes
                   itemBuilder: (context, index) => ListTile(
-                    title: Text("Solicitud Orden de venta N° ${index + 1}"),
+                    title: Text("Solicitud Orden de venta N° ${index + 1}",
+                    style: const TextStyle(
+                    color: Colors.black, 
+                    fontSize: 17, 
+                    fontWeight: FontWeight.bold),),
                     subtitle: const Padding(
                       padding: EdgeInsets.only(left: 8),
                       child: Row(
@@ -257,7 +355,7 @@ class _OrdenVenta_ALMState extends State<OrdenVenta_ALM> {
                     ),
                     leading: const Icon(
                       Icons.view_list_sharp,
-                      color: Colors.green,
+                      color: Color.fromARGB(255, 172, 45, 223),
                     ),
                     //Aqui acaba la parte de la solicitud (almenos de la vista pricipal)
                     onTap: () {
@@ -277,21 +375,38 @@ class _OrdenVenta_ALMState extends State<OrdenVenta_ALM> {
                             child: AlertDialog(
                               title: const Text(
                                 "Detalles de la Solicitud de Orden",
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 20),
+                                  style: TextStyle(
+                                  color: Color.fromARGB(255, 13, 28, 92), 
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
                               ),
                               content: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text(
-                                      "Nombre del Producto: ${snapshot.data?[index].nom_prod}"),
+                                      "Nombre del Producto: ${snapshot.data?[index].nom_prod}",
+                                      style: const TextStyle(
+                                      color: Color.fromARGB(255, 0, 0, 0), 
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                      ),
                                   const SizedBox(height: 8),
                                   Text(
-                                      "Código del producto: ${snapshot.data?[index].id_prod}"),
+                                      "Código del producto: ${snapshot.data?[index].id_prod}",
+                                      style: const TextStyle(
+                                      color: Color.fromARGB(255, 0, 0, 0), 
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                      ),
                                   const SizedBox(height: 8),
                                   Text(
-                                      "Cantidad: ${snapshot.data?[index].cant_ven}"),
+                                      "Cantidad: ${snapshot.data?[index].cant_ven}",
+                                      style: const TextStyle(
+                                      color: Color.fromARGB(255, 0, 0, 0), 
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                      ),
                                   const SizedBox(height: 8),
                                   TextField(
                                     controller: textFieldController,
@@ -359,12 +474,13 @@ class _OrdenVenta_ALMState extends State<OrdenVenta_ALM> {
                                     alignment: Alignment.center,
                                     backgroundColor: MaterialStateProperty.all(
                                         const Color.fromARGB(
-                                            255, 208, 181, 230)),
+                                            255, 208, 181, 230)
+                                            ),
                                   ),
                                   child: const Text(
                                     "Salir",
                                     style: TextStyle(
-                                        color: Colors.white, fontSize: 17),
+                                        color: Color.fromARGB(255, 2, 1, 1), fontSize: 17),
                                   ),
                                 ),
                               ],
