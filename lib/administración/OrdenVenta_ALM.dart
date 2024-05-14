@@ -384,30 +384,89 @@ class _OrdenVenta_ALMState extends State<OrdenVenta_ALM> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(
+                                  Row(
+                                    children: [
+                                      Text("Nombre del Producto:  ",
+                                      style: TextStyle(
+                                      fontSize: 16, 
+                                      fontWeight: FontWeight.bold, 
+                                      color: Color.fromARGB(255, 1, 70, 13)
+                                        ),
+                                      ),
+                                      Text("${snapshot.data?[index].nom_prod}",
+                                      style: const TextStyle(
+                                      fontSize: 16, 
+                                      fontWeight: FontWeight.bold, 
+                                      color: Color.fromARGB(255, 0, 0, 0)
+                                        ),
+                                        ),
+                                    ],
+                                  ),
+                                  
+                                  /*Text(
                                       "Nombre del Producto: ${snapshot.data?[index].nom_prod}",
                                       style: const TextStyle(
                                       color: Color.fromARGB(255, 0, 0, 0), 
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
-                                      ),
+                                      ),*/
                                   const SizedBox(height: 8),
-                                  Text(
+
+                                  Row(
+                                    children: [
+                                      const Text("Código del producto:  ",
+                                      style: TextStyle(
+                                      fontSize: 16, 
+                                      fontWeight: FontWeight.bold, 
+                                      color: Color.fromARGB(255, 1, 70, 13)
+                                        ),
+                                      ),
+                                      Text("${snapshot.data?[index].id_prod}",
+                                      style: const TextStyle(
+                                      fontSize: 16, 
+                                      fontWeight: FontWeight.bold, 
+                                      color: Color.fromARGB(255, 0, 0, 0)
+                                        ),
+                                        ),
+                                    ],
+                                  ),
+                                  
+                                  /*Text(
                                       "Código del producto: ${snapshot.data?[index].id_prod}",
                                       style: const TextStyle(
                                       color: Color.fromARGB(255, 0, 0, 0), 
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
-                                      ),
+                                      ),*/
                                   const SizedBox(height: 8),
-                                  Text(
+
+                                  Row(
+                                    children: [
+                                      const Text("Cantidad:  ",
+                                      style: TextStyle(
+                                      fontSize: 16, 
+                                      fontWeight: FontWeight.bold, 
+                                      color: Color.fromARGB(255, 1, 70, 13)
+                                        ),
+                                      ),
+                                      Text("${snapshot.data?[index].cant_ven} piezas",
+                                      style: const TextStyle(
+                                      fontSize: 16, 
+                                      fontWeight: FontWeight.bold, 
+                                      color: Color.fromARGB(255, 0, 0, 0)
+                                        ),
+                                        ),
+                                    ],
+                                  ),
+                                  /*Text(
                                       "Cantidad: ${snapshot.data?[index].cant_ven}",
                                       style: const TextStyle(
                                       color: Color.fromARGB(255, 0, 0, 0), 
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
-                                      ),
+                                      ),*/
                                   const SizedBox(height: 8),
+
                                   TextField(
                                     controller: textFieldController,
                                     decoration: const InputDecoration(
