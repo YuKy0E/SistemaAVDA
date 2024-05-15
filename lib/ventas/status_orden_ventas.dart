@@ -180,7 +180,7 @@ class _EstadoOrdenVentasState extends State<EstadoOrdenVentas> {
 
               Row(
                 children: [
-                  const Text('Estado de la Orden: ',
+                  const Text('aceptada o : ',
                 style: TextStyle(
                 fontSize: 17, 
                 fontWeight: FontWeight.bold, 
@@ -189,6 +189,72 @@ class _EstadoOrdenVentasState extends State<EstadoOrdenVentas> {
               ),
 
               Text('${doc['est_ord']}',
+                style: const TextStyle(
+                fontSize: 17, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 0, 0, 0)
+                  ),
+              ),
+                ],
+              ),
+
+              SizedBox(height: 8),
+
+              Row(
+                children: [
+                  const Text('Estado de la Orden: ',
+                style: TextStyle(
+                fontSize: 17, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 1, 70, 13)
+                  ),
+              ),
+
+              Text(
+                '${doc['est_ord'] ? 'abierta':'cerrada'}',
+                style: const TextStyle(
+                fontSize: 17, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 0, 0, 0)
+                  ),
+              ),
+                ],
+              ),
+
+              SizedBox(height: 8),
+
+              Row(
+                children: [
+                  const Text('Aceptada o declinada: ',
+                style: TextStyle(
+                fontSize: 17, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 1, 70, 13)
+                  ),
+              ),
+
+              Text(
+                '${doc['acept_ord'] ? 'declinada':'aceptada'}',
+                style: const TextStyle(
+                fontSize: 17, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 0, 0, 0)
+                  ),
+              ),
+                ],
+              ),
+
+              Row(
+                children: [
+                  const Text('Comentarios de la orden: ',
+                style: TextStyle(
+                fontSize: 17, 
+                fontWeight: FontWeight.bold, 
+                color: Color.fromARGB(255, 1, 70, 13)
+                  ),
+              ),
+
+              Text('${doc['com_ord']}',
                 style: const TextStyle(
                 fontSize: 17, 
                 fontWeight: FontWeight.bold, 
