@@ -11,7 +11,7 @@ class _EstadoOrdenVentasState extends State<EstadoOrdenVentas> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 174, 125, 219), 
+        backgroundColor: const Color.fromARGB(255, 174, 125, 219),
         elevation: 0,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -29,7 +29,6 @@ class _EstadoOrdenVentasState extends State<EstadoOrdenVentas> {
           ),
         ),
       ),
-
       body: _buildOrdenesList(),
     );
   }
@@ -47,25 +46,23 @@ class _EstadoOrdenVentasState extends State<EstadoOrdenVentas> {
         return ListView(
           children: snapshot.data!.docs.map((doc) {
             return ListTile(
-              title: Text('Orden de Venta: ${doc['id_ord']}',
-              style: const TextStyle(
-                fontSize: 17, 
-                fontWeight: FontWeight.bold, 
-                color: Color.fromARGB(255, 0, 0, 0)
-              ),
+              title: Text(
+                'Orden de Venta: ${doc['id_ord']}',
+                style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 0, 0, 0)),
               ),
               leading: const Icon(
-                      Icons.view_list_sharp,
-                      color: Color.fromARGB(255, 172, 45, 223),
-                    ),
+                Icons.view_list_sharp,
+                color: Color.fromARGB(255, 172, 45, 223),
+              ),
               onTap: () {
                 _mostrarDetallesOrden(context, doc);
               },
             );
           }).toList(),
-          
         );
-        
       },
     );
   }
@@ -75,13 +72,13 @@ class _EstadoOrdenVentasState extends State<EstadoOrdenVentas> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Detalles de la Orden de Venta: ${doc['id_ord']}',
-          textAlign: TextAlign.center,
+          title: Text(
+            'Detalles de la Orden de Venta: ${doc['id_ord']}',
+            textAlign: TextAlign.center,
             style: const TextStyle(
-                fontSize: 20, 
-                fontWeight: FontWeight.bold, 
-                color: Color.fromARGB(255, 46, 42, 94)
-              ),
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 46, 42, 94)),
           ),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,26 +86,24 @@ class _EstadoOrdenVentasState extends State<EstadoOrdenVentas> {
             children: <Widget>[
               Row(
                 children: [
-                  const Text('ID de Producto: ',
-                style: TextStyle(
-                fontSize: 17, 
-                fontWeight: FontWeight.bold, 
-                color: Color.fromARGB(255, 1, 70, 13)
+                  const Text(
+                    'ID de Producto: ',
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 1, 70, 13)),
                   ),
-              ),
-
-              Text(' ${doc['id_prod']}',
-                style: const TextStyle(
-                fontSize: 17, 
-                fontWeight: FontWeight.bold, 
-                color: Color.fromARGB(255, 0, 0, 0)
+                  Text(
+                    ' ${doc['id_prod']}',
+                    style: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 0, 0, 0)),
                   ),
-              ),
                 ],
               ),
-              
-              
-             /* Text('ID de Producto: ${doc['id_prod']}',
+
+              /* Text('ID de Producto: ${doc['id_prod']}',
                 style: const TextStyle(
                 fontSize: 17, 
                 fontWeight: FontWeight.bold, 
@@ -116,27 +111,24 @@ class _EstadoOrdenVentasState extends State<EstadoOrdenVentas> {
                   ),
               ),*/
               SizedBox(height: 8),
-
               Row(
                 children: [
-                  const Text('Cantidad solicitada: ',
-                style: TextStyle(
-                fontSize: 17, 
-                fontWeight: FontWeight.bold, 
-                color: Color.fromARGB(255, 1, 70, 13)
+                  const Text(
+                    'Cantidad solicitada: ',
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 1, 70, 13)),
                   ),
-              ),
-
-              Text('${doc['cant_ven']} piezas',
-                style: const TextStyle(
-                fontSize: 17, 
-                fontWeight: FontWeight.bold, 
-                color: Color.fromARGB(255, 0, 0, 0)
+                  Text(
+                    '${doc['cant_ven']} piezas',
+                    style: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 0, 0, 0)),
                   ),
-              ),
                 ],
               ),
-
 
               /*Text('Cantidad solicitada: ${doc['cant_ven']} piezas',
                 style: const TextStyle(
@@ -147,24 +139,22 @@ class _EstadoOrdenVentasState extends State<EstadoOrdenVentas> {
                 ),*/
 
               SizedBox(height: 8),
-
               Row(
                 children: [
-                  const Text('Costo total: ',
-                style: TextStyle(
-                fontSize: 17, 
-                fontWeight: FontWeight.bold, 
-                color: Color.fromARGB(255, 1, 70, 13)
+                  const Text(
+                    'Costo total: ',
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 1, 70, 13)),
                   ),
-              ),
-
-              Text('${doc['cost_ven']} pesos',
-                style: const TextStyle(
-                fontSize: 17, 
-                fontWeight: FontWeight.bold, 
-                color: Color.fromARGB(255, 0, 0, 0)
+                  Text(
+                    '${doc['cost_ven']} pesos',
+                    style: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 0, 0, 0)),
                   ),
-              ),
                 ],
               ),
 
@@ -175,93 +165,66 @@ class _EstadoOrdenVentasState extends State<EstadoOrdenVentas> {
                 color: Color.fromARGB(255, 0, 0, 0)
                   ),
                 ),*/
-              
-              SizedBox(height: 8),
-
-              Row(
-                children: [
-                  const Text('aceptada o : ',
-                style: TextStyle(
-                fontSize: 17, 
-                fontWeight: FontWeight.bold, 
-                color: Color.fromARGB(255, 1, 70, 13)
-                  ),
-              ),
-
-              Text('${doc['est_ord']}',
-                style: const TextStyle(
-                fontSize: 17, 
-                fontWeight: FontWeight.bold, 
-                color: Color.fromARGB(255, 0, 0, 0)
-                  ),
-              ),
-                ],
-              ),
 
               SizedBox(height: 8),
-
               Row(
                 children: [
-                  const Text('Estado de la Orden: ',
-                style: TextStyle(
-                fontSize: 17, 
-                fontWeight: FontWeight.bold, 
-                color: Color.fromARGB(255, 1, 70, 13)
+                  const Text(
+                    'Estado de la Orden: ',
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 1, 70, 13)),
                   ),
-              ),
-
-              Text(
-                '${doc['est_ord'] ? 'abierta':'cerrada'}',
-                style: const TextStyle(
-                fontSize: 17, 
-                fontWeight: FontWeight.bold, 
-                color: Color.fromARGB(255, 0, 0, 0)
+                  Text(
+                    '${doc['est_ord'] ? 'abierta' : 'cerrada'}',
+                    style: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 0, 0, 0)),
                   ),
-              ),
                 ],
               ),
-
               SizedBox(height: 8),
-
               Row(
                 children: [
-                  const Text('Aceptada o declinada: ',
-                style: TextStyle(
-                fontSize: 17, 
-                fontWeight: FontWeight.bold, 
-                color: Color.fromARGB(255, 1, 70, 13)
+                  const Text(
+                    'Aceptada o declinada: ',
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 1, 70, 13)),
                   ),
-              ),
-
-              Text(
-                '${doc['acept_ord'] ? 'declinada':'aceptada'}',
-                style: const TextStyle(
-                fontSize: 17, 
-                fontWeight: FontWeight.bold, 
-                color: Color.fromARGB(255, 0, 0, 0)
+                  Text(
+                    '${doc['acept_ord'] ?? "La orden no ha sido evaluada"}',
+                    style: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 0, 0, 0)),
                   ),
-              ),
                 ],
               ),
-
-              Row(
+              const Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Comentarios de la orden: ',
-                style: TextStyle(
-                fontSize: 17, 
-                fontWeight: FontWeight.bold, 
-                color: Color.fromARGB(255, 1, 70, 13)
+                  Text(
+                    'Comentarios de la orden: ',
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 1, 70, 13)),
                   ),
-              ),
-
-              Text('${doc['com_ord']}',
-                style: const TextStyle(
-                fontSize: 17, 
-                fontWeight: FontWeight.bold, 
-                color: Color.fromARGB(255, 0, 0, 0)
-                  ),
-              ),
                 ],
+              ),
+              const SizedBox(width: 8), // Espacio entre los textos
+              Flexible(
+                child: Text(
+                  '${doc['com_ord']}',
+                  style: const TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 0, 0, 0)),
+                ),
               ),
 
               /*Text('Estado de la Orden: ${doc['est_ord']}',
@@ -279,14 +242,19 @@ class _EstadoOrdenVentasState extends State<EstadoOrdenVentas> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cerrar',
-              style: TextStyle(
-              color: Colors.black, fontSize: 17,),),
-                            style: ButtonStyle(
-                            alignment: Alignment.center,
-                            backgroundColor: MaterialStateProperty.all(
-                                 const Color.fromARGB(255, 208, 181, 230)),
-                                 padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 0.4, horizontal: 10.0)),
+              child: Text(
+                'Cerrar',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 17,
+                ),
+              ),
+              style: ButtonStyle(
+                alignment: Alignment.center,
+                backgroundColor: MaterialStateProperty.all(
+                    const Color.fromARGB(255, 208, 181, 230)),
+                padding: MaterialStateProperty.all(const EdgeInsets.symmetric(
+                    vertical: 0.4, horizontal: 10.0)),
               ),
             ),
           ],
